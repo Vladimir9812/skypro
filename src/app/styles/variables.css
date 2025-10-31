@@ -7,13 +7,14 @@
   --grey-color: #999;
   --grey-background: #f4f5f6;
 
-  --padding-xxs: 4px;
-  --padding-xs: 8px;
-  --padding-sm: 12px;
-  --padding: 16px;
-  --padding-md: 20px;
-  --padding-lg: 24px;
-  --padding-xl: 32px;
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing: 16px;
+  --spacing-md: 20px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
 
   --box-shadow: 0 20px 67px -12px #00000021;
 }

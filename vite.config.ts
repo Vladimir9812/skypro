@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import eslint from 'vite-plugin-eslint';
+import svgr from 'vite-plugin-svgr';
 
 // postcss plugins
 import postcssNested from 'postcss-nested';
@@ -12,9 +13,8 @@ import postcssAutoprefixer from 'autoprefixer';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint()],
+  plugins: [react(), eslint(), svgr()],
   css: {
     postcss: {
       // prettier-ignore
