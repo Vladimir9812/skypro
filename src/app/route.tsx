@@ -11,14 +11,14 @@ const router = createBrowserRouter([
       {
         index: true,
         lazy: async () => {
-          const module = await import('~/pages/mainPage.tsx');
+          const module = await import('~/pages/main/mainPage.tsx');
           return { Component: module.default };
         },
       },
       {
         path: '/analyze',
         lazy: async () => {
-          const module = await import('~/pages/analyzePage.tsx');
+          const module = await import('~/pages/analyze/analyzePage.tsx');
           return { Component: module.default };
         },
       },

@@ -1,8 +1,9 @@
 import type { JSX } from 'react';
-import classes from './layout.module.css';
 import { NavLink, Outlet } from 'react-router';
 import Logo from '~/assets/logo.svg?react';
 import { Button } from '@mui/material';
+import { text } from '~/text.ts';
+import classes from './layout.module.css';
 
 const Layout = (): JSX.Element => {
   return (
@@ -16,18 +17,18 @@ const Layout = (): JSX.Element => {
               end
               className={({ isActive }) => (isActive ? classes['link-active'] : classes.link)}
             >
-              Мои расходы
+              {text.header.myExpensesLink}
             </NavLink>
             <NavLink
               to='/analyze'
               end
               className={({ isActive }) => (isActive ? classes['link-active'] : classes.link)}
             >
-              Анализ расходов
+              {text.header.analyzeExpensesLink}
             </NavLink>
           </nav>
           <Button variant='text' className={classes['exit-btn']}>
-            Выйти
+            {text.header.exitBtn}
           </Button>
         </div>
       </header>

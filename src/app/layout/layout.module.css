@@ -38,7 +38,6 @@
   }
 
   .exit-btn {
-    font-family: "Montserrat", sans-serif;
     text-transform: none;
     color: var(--base-black);
     padding: var(--spacing-xxs);
@@ -54,5 +53,6 @@
     display: flex;
     max-width: var(--max-width);
     margin: 0 auto;
+    height: 100%;
   }
 }

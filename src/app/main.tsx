@@ -2,6 +2,8 @@ import { type JSX, StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import { router } from '~/app/route.tsx';
+import { ThemeProvider } from '@mui/material';
+import { theme } from '~/app/theme.ts';
 
 import './styles/main.css';
 
@@ -11,7 +13,9 @@ const rootElement = document.getElementById('root');
 const App = (): JSX.Element => {
   return (
     <StrictMode>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </StrictMode>
   );
 };
