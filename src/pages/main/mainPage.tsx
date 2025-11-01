@@ -8,7 +8,7 @@ import classes from './mainPage.module.css';
 const MainPage = (): JSX.Element => {
   return (
     <LayoutPage title={text.title.myExpenses}>
-      <div className={classes.content}>
+      <div className={classes['main-page']}>
         <TableWidget />
         <FormWidget />
       </div>

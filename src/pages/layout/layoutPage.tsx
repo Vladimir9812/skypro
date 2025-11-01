@@ -9,7 +9,7 @@ type Props = {
 
 const LayoutPage = ({ title, children }: Props): JSX.Element => {
   return (
-    <div className={classes.page}>
+    <div className={classes['layout-page']}>
       <Typography variant='h1'>{title}</Typography>
       {children}
     </div>

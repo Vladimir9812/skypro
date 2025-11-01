@@ -6,7 +6,7 @@ type Props = {
 };
 
 const WidgetLayout = ({ children }: Props): JSX.Element => {
-  return <section className={classes.widget}>{children}</section>;
+  return <section className={classes['widget-layout']}>{children}</section>;
 };
 
 export { WidgetLayout };

@@ -1,0 +1,23 @@
+.table-widget {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-xl);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+
+  .title {
+    margin-right: auto;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--link-color);
+    border-bottom: 1px solid var(--link-color);
+  }
+}
