@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  width: 100%;
+
+  .label {
+    color: var(--base-black);
+    font-weight: 600;
+    margin-bottom: var(--spacing);
+  }
+
+  .submit {
+    text-transform: none;
+    color: var(--base-white);
+    border-radius: 6px;
+    background: var(--link-color);
+    padding: var(--spacing-xs);
+  }
+}

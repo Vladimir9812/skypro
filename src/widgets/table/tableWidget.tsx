@@ -82,10 +82,11 @@ const TableWidget = (): JSX.Element => {
           </Typography>
 
           <FormControl variant='standard'>
-            <InputLabel id='categoryLabel'>{text.widget.table.filter}</InputLabel>
+            <InputLabel htmlFor='category' className={classes.label}>
+              {text.widget.table.filter}
+            </InputLabel>
             <Select
               value={categoryId}
-              labelId='categoryLabel'
               name='category'
               variant='standard'
               sx={{ minWidth: 190 }}
@@ -100,13 +101,12 @@ const TableWidget = (): JSX.Element => {
           </FormControl>
 
           <FormControl variant='standard'>
-            <InputLabel id='dateLabel'>
+            <InputLabel htmlFor='date' className={classes.label}>
               {text.widget.table.sort}
-              <span className={classes.label}>{text.widget.table.sortItem}</span>
+              <span className={classes['label-subtext']}>{text.widget.table.sortItem}</span>
             </InputLabel>
             <Select
               value={dateSort}
-              labelId='dateLabel'
               name='date'
               variant='standard'
               sx={{ minWidth: 150 }}

@@ -15,9 +15,14 @@
   }
 
   .label {
-    font-weight: 600;
-    color: var(--link-color);
-    border-bottom: 1px solid var(--link-color);
+    font-size: var(--spacing-sm);
+    color: var(--base-black) !important;
+
+    &-subtext {
+      font-weight: 600;
+      color: var(--link-color);
+      border-bottom: 1px solid var(--link-color);
+    }
   }
 }
 

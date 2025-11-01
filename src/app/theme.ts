@@ -5,29 +5,15 @@ const theme = createTheme({
     h1: {
       fontSize: '2rem',
       fontWeight: 'bold',
-      lineHeight: '1.5',
+      lineHeight: 1.5,
     },
     h2: {
-      fontSize: '24px',
+      fontSize: 24,
       fontWeight: 'bold',
     },
     fontFamily: ['Montserrat', 'sans-serif'].join(','),
   },
   components: {
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          '& .MuiFormLabel-root': {
-            fontSize: '12px',
-            color: '#000 !important',
-          },
-          // // Label внутри Input
-          // '& .MuiInputLabel-root + .MuiInput-root': {
-          //   fontSize: '12px', // label для Input
-          // },
-        },
-      },
-    },
     MuiSelect: {
       styleOverrides: {
         root: {
@@ -39,15 +25,15 @@ const theme = createTheme({
           },
           '.MuiSelect-select': {
             padding: 0,
-            fontSize: '12px',
+            fontSize: 12,
           },
           '&:after': {
             display: 'none',
           },
         },
         icon: {
-          top: '5px',
-          fontSize: '16px',
+          top: 5,
+          fontSize: 16,
           color: 'black',
         },
       },
@@ -56,7 +42,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '.MuiButtonBase-root': {
-            fontSize: '14px',
+            fontSize: 14,
           },
         },
       },
@@ -65,15 +51,15 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           flexGrow: 1,
-          height: '100px',
+          height: 100,
 
           '&::-webkit-scrollbar': {
-            width: '8px',
+            width: 8,
           },
 
           '&::-webkit-scrollbar-thumb': {
             cursor: 'pointer',
-            borderRadius: '99px',
+            borderRadius: 99,
             backgroundColor: '#D9D9D9',
           },
         },
@@ -83,24 +69,51 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '.MuiTableCell-root': {
-            fontSize: '12px',
+            fontSize: 12,
 
             '&:first-child': {
-              paddingLeft: '32px',
+              paddingLeft: 32,
             },
 
             '&:last-child': {
-              paddingRight: '32px',
+              paddingRight: 32,
             },
           },
           '.MuiTableCell-head': {
             color: '#999',
-            fontWeight: '400',
-            padding: '4px',
+            fontWeight: 400,
+            padding: 4,
           },
           '.MuiTableCell-body': {
             border: 'none',
-            padding: '8px',
+            padding: 8,
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '.MuiInputBase-input': {
+            fontSize: 12,
+            color: '#999',
+            padding: 10,
+
+            '&::placeholder': {
+              color: '#999',
+              opacity: 1,
+            },
+          },
+          '.MuiOutlinedInput-root': {
+            borderRadius: 6,
+
+            '&:hover fieldset': {
+              borderColor: '#999',
+            },
+            '&.Mui-focused fieldset': {
+              borderWidth: 1,
+              borderColor: '#999',
+            },
           },
         },
       },
