@@ -48,6 +48,7 @@
   flex-grow: 1;
   background: var(--grey-background);
   padding: var(--spacing-xl) var(--spacing-lg);
+  overflow: hidden;
 
   &-content {
     display: flex;

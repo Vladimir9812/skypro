@@ -3,4 +3,5 @@
   background: var(--base-white);
   border-radius: 30px;
   box-shadow: var(--box-shadow);
+  overflow: hidden;
 }

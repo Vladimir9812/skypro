@@ -8,7 +8,7 @@ const theme = createTheme({
       lineHeight: '1.5',
     },
     h2: {
-      fontSize: '1.5rem',
+      fontSize: '24px',
       fontWeight: 'bold',
     },
     fontFamily: ['Montserrat', 'sans-serif'].join(','),
@@ -18,7 +18,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiFormLabel-root': {
-            fontSize: '0.75rem',
+            fontSize: '12px',
             color: '#000 !important',
           },
           // // Label внутри Input
@@ -39,7 +39,7 @@ const theme = createTheme({
           },
           '.MuiSelect-select': {
             padding: 0,
-            fontSize: '0.75rem',
+            fontSize: '12px',
           },
           '&:after': {
             display: 'none',
@@ -47,7 +47,7 @@ const theme = createTheme({
         },
         icon: {
           top: '5px',
-          fontSize: '1.05rem',
+          fontSize: '16px',
           color: 'black',
         },
       },
@@ -56,7 +56,42 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '.MuiButtonBase-root': {
-            fontSize: '0.875rem',
+            fontSize: '14px',
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          flexGrow: 1,
+          height: '100px',
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          '.MuiTableCell-root': {
+            fontSize: '12px',
+
+            '&:first-child': {
+              paddingLeft: '32px',
+            },
+
+            '&:last-child': {
+              paddingRight: '32px',
+            },
+          },
+          '.MuiTableCell-head': {
+            color: '#999',
+            fontWeight: '400',
+            padding: '4px',
+          },
+          '.MuiTableCell-body': {
+            border: 'none',
+            padding: '8px',
           },
         },
       },

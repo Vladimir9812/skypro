@@ -2,14 +2,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: var(--spacing-xl);
 }
 
 .header {
   display: flex;
   align-items: flex-end;
   gap: var(--spacing-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing);
 
   .title {
     margin-right: auto;

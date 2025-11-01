@@ -1,9 +1,22 @@
 import type { JSX } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
 import classes from './tableWidget.module.css';
-import { FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import { text } from '~/text.ts';
-import { categoriesOptions, sortOptions } from '~/data.ts';
+import { categoriesOptions, consumptions, sortOptions } from '~/data.ts';
 
 const TableWidget = (): JSX.Element => {
   return (
@@ -44,6 +57,33 @@ const TableWidget = (): JSX.Element => {
             </Select>
           </FormControl>
         </div>
+
+        <TableContainer component={Paper}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>{text.widget.table.columns.description}</TableCell>
+                <TableCell>{text.widget.table.columns.category}</TableCell>
+                <TableCell>{text.widget.table.columns.date}</TableCell>
+                <TableCell>{text.widget.table.columns.sum}</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {consumptions.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell component='th' scope='row'>
+                    {row.description}
+                  </TableCell>
+                  <TableCell>{row.category}</TableCell>
+                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row.sum + ' ₽'}</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </WidgetLayout>
   );
