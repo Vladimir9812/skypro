@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import { type JSX, useState } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
 import {
   Button,
@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  type SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
@@ -15,12 +16,63 @@ import {
   Typography,
 } from '@mui/material';
 import { text } from '~/text.ts';
-import { categoriesMapping, categoriesOptions, consumptions, sortOptions } from '~/data.ts';
+import {
+  categoriesMapping,
+  categoriesOptions,
+  Category,
+  consumptions,
+  Sort,
+  sortOptions,
+} from '~/data.ts';
 import Edit from '~/assets/edit.svg?react';
 import Delete from '~/assets/bag.svg?react';
 import classes from './tableWidget.module.css';
+import type { Consumption } from '~/types.ts';
 
 const TableWidget = (): JSX.Element => {
+  const [data, setData] = useState<Consumption[]>(consumptions);
+
+  const [dateSort, setDateSort] = useState<Sort | ''>('');
+  const [categoryId, setCategoryId] = useState<Category | ''>('');
+
+  // функция фильтрации по категории
+  const handleFilter = (event: SelectChangeEvent): void => {
+    const category = event.target.value as unknown as Category;
+
+    if (!category) {
+      setData(consumptions);
+    } else {
+      setData((data) => data.filter((it) => it.category === category));
+    }
+
+    setCategoryId(category);
+  };
+
+  // функция сотрировки по дате
+  const handleSort = (event: SelectChangeEvent): void => {
+    const sort = event.target.value as unknown as Sort;
+    const isAsc = sort === Sort.asc;
+
+    if (!sort) {
+      setData(consumptions);
+    } else {
+      setData((data) =>
+        data.toSorted((a, b) => {
+          if (a.date.isBefore(b.date)) return isAsc ? 1 : -1;
+          if (a.date.isAfter(b.date)) return isAsc ? -1 : 1;
+          return 0;
+        }),
+      );
+    }
+
+    setDateSort(sort);
+  };
+
+  // функция удаления
+  const handleDelete = (item: Consumption): void => {
+    setData((data) => data.filter((it) => it.id !== item.id));
+  };
+
   return (
     <WidgetLayout>
       <div className={classes['table-widget']}>
@@ -32,10 +84,12 @@ const TableWidget = (): JSX.Element => {
           <FormControl variant='standard'>
             <InputLabel id='categoryLabel'>{text.widget.table.filter}</InputLabel>
             <Select
+              value={categoryId}
               labelId='categoryLabel'
               name='category'
               variant='standard'
               sx={{ minWidth: 190 }}
+              onChange={handleFilter}
             >
               {categoriesOptions.map((cat) => (
                 <MenuItem key={cat.value} value={cat.value}>
@@ -50,7 +104,14 @@ const TableWidget = (): JSX.Element => {
               {text.widget.table.sort}
               <span className={classes.label}>{text.widget.table.sortItem}</span>
             </InputLabel>
-            <Select labelId='dateLabel' name='date' variant='standard' sx={{ minWidth: 150 }}>
+            <Select
+              value={dateSort}
+              labelId='dateLabel'
+              name='date'
+              variant='standard'
+              sx={{ minWidth: 150 }}
+              onChange={handleSort}
+            >
               {sortOptions.map((sort) => (
                 <MenuItem key={sort.value} value={sort.value}>
                   {sort.label}
@@ -72,15 +133,19 @@ const TableWidget = (): JSX.Element => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {consumptions.map((row) => (
+              {data.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell sx={{ minWidth: 150 }}>{row.description}</TableCell>
                   <TableCell sx={{ minWidth: 120 }}>{categoriesMapping[row.category]}</TableCell>
-                  <TableCell sx={{ minWidth: 100 }}>{row.date}</TableCell>
+                  <TableCell sx={{ minWidth: 120 }}>{row.date.format('DD.MM.YYYY')}</TableCell>
                   <TableCell sx={{ minWidth: 100 }}>{row.sum + ' ₽'}</TableCell>
                   <TableCell align='right'>
                     <Button className={classes['action-btn']} endIcon={<Edit />} />
-                    <Button className={classes['action-btn']} startIcon={<Delete />} />
+                    <Button
+                      className={classes['action-btn']}
+                      startIcon={<Delete />}
+                      onClick={() => handleDelete(row)}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

@@ -66,6 +66,16 @@ const theme = createTheme({
         root: {
           flexGrow: 1,
           height: '100px',
+
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+
+          '&::-webkit-scrollbar-thumb': {
+            cursor: 'pointer',
+            borderRadius: '99px',
+            backgroundColor: '#D9D9D9',
+          },
         },
       },
     },
