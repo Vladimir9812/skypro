@@ -20,3 +20,14 @@
     border-bottom: 1px solid var(--link-color);
   }
 }
+
+.action-btn {
+  min-width: min-content !important;
+  color: var(--grey-color) !important;
+
+  span {
+    margin: 0 !important;
+  }
+}
+
+

@@ -1,11 +1,10 @@
 import type { JSX } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
-import classes from './tableWidget.module.css';
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   Table,
   TableBody,
@@ -16,7 +15,10 @@ import {
   Typography,
 } from '@mui/material';
 import { text } from '~/text.ts';
-import { categoriesOptions, consumptions, sortOptions } from '~/data.ts';
+import { categoriesMapping, categoriesOptions, consumptions, sortOptions } from '~/data.ts';
+import Edit from '~/assets/edit.svg?react';
+import Delete from '~/assets/bag.svg?react';
+import classes from './tableWidget.module.css';
 
 const TableWidget = (): JSX.Element => {
   return (
@@ -58,7 +60,7 @@ const TableWidget = (): JSX.Element => {
           </FormControl>
         </div>
 
-        <TableContainer component={Paper}>
+        <TableContainer>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -72,13 +74,14 @@ const TableWidget = (): JSX.Element => {
             <TableBody>
               {consumptions.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell component='th' scope='row'>
-                    {row.description}
+                  <TableCell sx={{ minWidth: 150 }}>{row.description}</TableCell>
+                  <TableCell sx={{ minWidth: 120 }}>{categoriesMapping[row.category]}</TableCell>
+                  <TableCell sx={{ minWidth: 100 }}>{row.date}</TableCell>
+                  <TableCell sx={{ minWidth: 100 }}>{row.sum + ' ₽'}</TableCell>
+                  <TableCell align='right'>
+                    <Button className={classes['action-btn']} endIcon={<Edit />} />
+                    <Button className={classes['action-btn']} startIcon={<Delete />} />
                   </TableCell>
-                  <TableCell>{row.category}</TableCell>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.sum + ' ₽'}</TableCell>
-                  <TableCell></TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -16,6 +16,15 @@ enum Sort {
   desc = 'desc',
 }
 
+const categoriesMapping = {
+  [Category.food]: text.category.food,
+  [Category.transport]: text.category.transport,
+  [Category.house]: text.category.house,
+  [Category.entertainment]: text.category.entertainment,
+  [Category.education]: text.category.education,
+  [Category.other]: text.category.other,
+};
+
 const categoriesOptions = [
   { label: text.category.all, value: '' },
   { label: text.category.food, value: Category.food },
@@ -119,4 +128,4 @@ const consumptions: Consumption[] = [
   },
 ];
 
-export { Category, categoriesOptions, sortOptions, consumptions };
+export { Category, categoriesOptions, categoriesMapping, sortOptions, consumptions };

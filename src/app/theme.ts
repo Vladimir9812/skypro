@@ -61,12 +61,11 @@ const theme = createTheme({
         },
       },
     },
-    MuiPaper: {
+    MuiTableContainer: {
       styleOverrides: {
         root: {
           flexGrow: 1,
           height: '100px',
-          boxShadow: 'none',
         },
       },
     },
