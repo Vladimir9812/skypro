@@ -51,7 +51,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           flexGrow: 1,
-          height: 100,
 
           '&::-webkit-scrollbar': {
             width: 8,

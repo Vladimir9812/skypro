@@ -4,3 +4,18 @@
   gap: var(--spacing-xl);
   flex-grow: 1;
 }
+
+@media screen and (max-width: 1024px) {
+  .main-page {
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr;
+
+    section:first-of-type {
+      order: 2;
+    }
+
+    section:last-of-type {
+      order: 1;
+    }
+  }
+}

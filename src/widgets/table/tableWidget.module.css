@@ -26,12 +26,22 @@
   }
 }
 
+.table {
+  height: 100px;
+}
+
 .action-btn {
   min-width: min-content !important;
   color: var(--grey-color) !important;
 
   span {
     margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .table {
+    height: auto;
   }
 }
 

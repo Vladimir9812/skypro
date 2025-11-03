@@ -114,7 +114,7 @@ const TableWidget = (): JSX.Element => {
           </FormControl>
         </div>
 
-        <TableContainer>
+        <TableContainer className={classes.table}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>

@@ -1,5 +1,5 @@
 import { text } from '~/text.ts';
-import type { Consumption } from '~/types.ts';
+import type { Chip, Consumption, Option } from '~/types.ts';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import Food from '~/assets/edit.svg?react';
@@ -23,7 +23,7 @@ enum Sort {
   desc = 'desc',
 }
 
-const categoryMapping = {
+const categoryMapping: Record<Category, string> = {
   [Category.food]: text.category.food,
   [Category.transport]: text.category.transport,
   [Category.house]: text.category.house,
@@ -32,7 +32,7 @@ const categoryMapping = {
   [Category.other]: text.category.other,
 };
 
-const categoryOptions = [
+const categoryOptions: Option[] = [
   { label: text.category.all, value: '' },
   { label: text.category.food, value: Category.food },
   { label: text.category.transport, value: Category.transport },
@@ -42,7 +42,7 @@ const categoryOptions = [
   { label: text.category.other, value: Category.other },
 ];
 
-const categoryChips = [
+const categoryChips: Chip[] = [
   { label: text.category.food, value: Category.food, icon: Food },
   { label: text.category.transport, value: Category.transport, icon: Transport },
   { label: text.category.house, value: Category.house, icon: House },
@@ -51,7 +51,7 @@ const categoryChips = [
   { label: text.category.other, value: Category.other, icon: Other },
 ];
 
-const sortOptions = [
+const sortOptions: Option[] = [
   { label: text.sort.default, value: '' },
   { label: text.sort.asc, value: Sort.asc },
   { label: text.sort.desc, value: Sort.desc },
@@ -85,13 +85,6 @@ const consumptions: Consumption[] = [
     category: Category.other,
     date: dayjs('2024-07-03'),
     sum: 60,
-  },
-  {
-    id: uuidv4(),
-    description: 'Бургер Кинг',
-    category: Category.food,
-    date: dayjs('2024-07-02'),
-    sum: 2500,
   },
   {
     id: uuidv4(),

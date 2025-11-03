@@ -12,35 +12,36 @@
   &-content {
     display: flex;
     justify-content: space-between;
+    gap: var(--spacing);
     align-items: center;
     max-width: var(--max-width);
     margin: 0 auto;
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xl);
-    margin-right: var(--spacing-xxl);
-
-    .link {
-      color: var(--base-black);
-      text-decoration: none;
-    }
-
-    .link-active {
-      font-weight: 600;
-      padding-bottom: 2px;
-      color: var(--link-color);
-      text-decoration: none;
-      border-bottom: 1px solid var(--link-color);
-    }
   }
 
   .exit-btn {
     text-transform: none;
     color: var(--base-black);
     padding: var(--spacing-xxs);
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  margin-right: var(--spacing-xxl);
+
+  .link {
+    color: var(--base-black);
+    text-decoration: none;
+  }
+
+  .link-active {
+    font-weight: 600;
+    padding-bottom: 2px;
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--link-color);
   }
 }
 
@@ -55,5 +56,16 @@
     max-width: var(--max-width);
     margin: 0 auto;
     height: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .layout {
+    height: auto;
+  }
+
+  .nav {
+    margin: 0;
+    gap: var(--spacing);
   }
 }
