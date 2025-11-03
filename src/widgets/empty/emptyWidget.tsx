@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
-import classes from './emptyWidget.module.css';
 import { text } from '~/text.ts';
+import classes from './emptyWidget.module.css';
 
 const EmptyWidget = (): JSX.Element => {
   return (

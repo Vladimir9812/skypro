@@ -1,4 +1,4 @@
-import { type JSX, useState } from 'react';
+import { type JSX, useEffect, useState } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
 import {
   Button,
@@ -26,51 +26,44 @@ import {
 } from '~/data.ts';
 import Edit from '~/assets/edit.svg?react';
 import Delete from '~/assets/bag.svg?react';
-import classes from './tableWidget.module.css';
 import type { Consumption } from '~/types.ts';
+import classes from './tableWidget.module.css';
 
 const TableWidget = (): JSX.Element => {
   const [data, setData] = useState<Consumption[]>(consumptions);
 
   const [dateSort, setDateSort] = useState<Sort | ''>('');
   const [categoryId, setCategoryId] = useState<Category | ''>('');
+  const [deletedIds, setDeletedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const isAsc = dateSort === Sort.asc;
+
+    setData(
+      consumptions
+        .filter((it) => !deletedIds.includes(it.id))
+        .filter((it) => (categoryId ? it.category === categoryId : true))
+        .toSorted((a, b) => {
+          if (a.date.isBefore(b.date)) return dateSort ? (isAsc ? 1 : -1) : 0;
+          if (a.date.isAfter(b.date)) return dateSort ? (isAsc ? -1 : 1) : 0;
+          return 0;
+        }),
+    );
+  }, [categoryId, dateSort, deletedIds]);
 
   // функция фильтрации по категории
-  const handleFilter = (event: SelectChangeEvent): void => {
-    const category = event.target.value as unknown as Category;
-
-    if (!category) {
-      setData(consumptions);
-    } else {
-      setData((data) => data.filter((it) => it.category === category));
-    }
-
-    setCategoryId(category);
+  const handleFilter = ({ target }: SelectChangeEvent): void => {
+    setCategoryId(target.value as Category);
   };
 
   // функция сотрировки по дате
-  const handleSort = (event: SelectChangeEvent): void => {
-    const sort = event.target.value as unknown as Sort;
-    const isAsc = sort === Sort.asc;
-
-    if (!sort) {
-      setData(consumptions);
-    } else {
-      setData((data) =>
-        data.toSorted((a, b) => {
-          if (a.date.isBefore(b.date)) return isAsc ? 1 : -1;
-          if (a.date.isAfter(b.date)) return isAsc ? -1 : 1;
-          return 0;
-        }),
-      );
-    }
-
-    setDateSort(sort);
+  const handleSort = ({ target }: SelectChangeEvent): void => {
+    setDateSort(target.value as Sort);
   };
 
   // функция удаления
   const handleDelete = (item: Consumption): void => {
-    setData((data) => data.filter((it) => it.id !== item.id));
+    setDeletedIds((ids) => [...ids, item.id]);
   };
 
   return (
