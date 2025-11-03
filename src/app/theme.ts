@@ -55,6 +55,7 @@ const theme = createTheme({
 
           '&::-webkit-scrollbar': {
             width: 8,
+            height: 8,
           },
 
           '&::-webkit-scrollbar-thumb': {
@@ -114,6 +115,23 @@ const theme = createTheme({
               borderWidth: 1,
               borderColor: '#999',
             },
+          },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          gap: 12,
+          padding: '4px 16px',
+          background: '#F4F5F6',
+
+          '& .MuiChip-label': {
+            padding: 0,
+          },
+          '& .MuiChip-icon': {
+            color: '#000',
+            margin: 0,
           },
         },
       },

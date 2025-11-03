@@ -2,6 +2,12 @@ import { text } from '~/text.ts';
 import type { Consumption } from '~/types.ts';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
+import Food from '~/assets/edit.svg?react';
+import Transport from '~/assets/transport.svg?react';
+import House from '~/assets/house.svg?react';
+import Entertainment from '~/assets/entertainment.svg?react';
+import Education from '~/assets/education.svg?react';
+import Other from '~/assets/other.svg?react';
 
 enum Category {
   food = '1',
@@ -17,7 +23,7 @@ enum Sort {
   desc = 'desc',
 }
 
-const categoriesMapping = {
+const categoryMapping = {
   [Category.food]: text.category.food,
   [Category.transport]: text.category.transport,
   [Category.house]: text.category.house,
@@ -26,7 +32,7 @@ const categoriesMapping = {
   [Category.other]: text.category.other,
 };
 
-const categoriesOptions = [
+const categoryOptions = [
   { label: text.category.all, value: '' },
   { label: text.category.food, value: Category.food },
   { label: text.category.transport, value: Category.transport },
@@ -34,6 +40,15 @@ const categoriesOptions = [
   { label: text.category.entertainment, value: Category.entertainment },
   { label: text.category.education, value: Category.education },
   { label: text.category.other, value: Category.other },
+];
+
+const categoryChips = [
+  { label: text.category.food, value: Category.food, icon: Food },
+  { label: text.category.transport, value: Category.transport, icon: Transport },
+  { label: text.category.house, value: Category.house, icon: House },
+  { label: text.category.entertainment, value: Category.entertainment, icon: Entertainment },
+  { label: text.category.education, value: Category.education, icon: Education },
+  { label: text.category.other, value: Category.other, icon: Other },
 ];
 
 const sortOptions = [
@@ -129,4 +144,12 @@ const consumptions: Consumption[] = [
   },
 ];
 
-export { Category, Sort, categoriesOptions, categoriesMapping, sortOptions, consumptions };
+export {
+  Category,
+  Sort,
+  categoryOptions,
+  categoryMapping,
+  categoryChips,
+  sortOptions,
+  consumptions,
+};

@@ -5,16 +5,17 @@ import {
   Button,
   Chip,
   FormControl,
-  FormGroup,
+  FormControlLabel,
   FormLabel,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from '@mui/material';
 import { text } from '~/text.ts';
-import classes from './formWidget.module.css';
 import { maskDateInput } from '~/widgets/form/utils.ts';
-import { consumptions } from '~/data.ts';
-import Delete from '~/assets/bag.svg?react';
+import { categoryChips } from '~/data.ts';
+import classes from './formWidget.module.css';
 
 const FormWidget = (): JSX.Element => {
   const handleSubmit = (event: FormEvent): void => {
@@ -26,7 +27,7 @@ const FormWidget = (): JSX.Element => {
       <Box component='form' className={classes.form} onSubmit={handleSubmit}>
         <Typography variant='h2'>{text.widget.form.title}</Typography>
 
-        <FormControl variant='standard'>
+        <FormControl>
           <FormLabel htmlFor='description' className={classes.label}>
             {text.widget.form.label.description}
           </FormLabel>
@@ -39,21 +40,23 @@ const FormWidget = (): JSX.Element => {
           />
         </FormControl>
 
-        <FormControl fullWidth>
+        <FormControl>
           <FormLabel htmlFor='category' className={classes.label}>
             {text.widget.form.label.category}
           </FormLabel>
-
-          <FormGroup id='category'>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
-              {consumptions.map((cat) => (
-                <Chip key={cat.id} icon={<Delete />} label={cat.sum} clickable />
-              ))}
-            </Box>
-          </FormGroup>
+          <RadioGroup id='category' name='category' className={classes['radio-group']}>
+            {categoryChips.map((cat) => (
+              <FormControlLabel
+                key={cat.label}
+                value={cat.value}
+                control={<Radio sx={{ display: 'none' }} />}
+                label={<Chip icon={cat.icon && <cat.icon />} label={cat.label} clickable />}
+              />
+            ))}
+          </RadioGroup>
         </FormControl>
 
-        <FormControl variant='standard'>
+        <FormControl>
           <FormLabel htmlFor='date' className={classes.label}>
             {text.widget.form.label.date}
           </FormLabel>
@@ -67,7 +70,7 @@ const FormWidget = (): JSX.Element => {
           />
         </FormControl>
 
-        <FormControl variant='standard'>
+        <FormControl>
           <FormLabel htmlFor='description' className={classes.label}>
             {text.widget.form.label.sum}
           </FormLabel>

@@ -17,8 +17,8 @@ import {
 } from '@mui/material';
 import { text } from '~/text.ts';
 import {
-  categoriesMapping,
-  categoriesOptions,
+  categoryMapping,
+  categoryOptions,
   Category,
   consumptions,
   Sort,
@@ -85,7 +85,7 @@ const TableWidget = (): JSX.Element => {
               sx={{ minWidth: 190 }}
               onChange={handleFilter}
             >
-              {categoriesOptions.map((cat) => (
+              {categoryOptions.map((cat) => (
                 <MenuItem key={cat.value} value={cat.value}>
                   {cat.label}
                 </MenuItem>
@@ -129,7 +129,7 @@ const TableWidget = (): JSX.Element => {
               {data.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell sx={{ minWidth: 150 }}>{row.description}</TableCell>
-                  <TableCell sx={{ minWidth: 120 }}>{categoriesMapping[row.category]}</TableCell>
+                  <TableCell sx={{ minWidth: 120 }}>{categoryMapping[row.category]}</TableCell>
                   <TableCell sx={{ minWidth: 120 }}>{row.date.format('DD.MM.YYYY')}</TableCell>
                   <TableCell sx={{ minWidth: 100 }}>{row.sum + ' ₽'}</TableCell>
                   <TableCell align='right'>

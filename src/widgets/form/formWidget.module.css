@@ -11,6 +11,15 @@
     margin-bottom: var(--spacing);
   }
 
+  .radio-group {
+    flex-direction: row;
+    gap: var(--spacing-xs);
+
+    label {
+      margin: 0;
+    }
+  }
+
   .submit {
     text-transform: none;
     color: var(--base-white);
