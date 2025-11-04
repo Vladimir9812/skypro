@@ -1,1 +1,0 @@
-import{j as t}from"./index-C_y3qir0.js";import{W as s,L as n}from"./widgetLayout-BUzokGVq.js";import{t as e}from"./text-22NOqvX5.js";const o="_content_1wq0j_1",a={content:o},r=()=>t.jsx(s,{children:t.jsx("div",{className:a.content,children:e.widget.empty})}),m=()=>t.jsx(n,{title:e.title.analyzeExpenses,children:t.jsx(r,{})});export{m as default};
