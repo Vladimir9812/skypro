@@ -8,6 +8,9 @@
 .header {
   background: var(--base-white);
   padding: var(--spacing);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   &-content {
     display: flex;
@@ -49,7 +52,6 @@
   flex-grow: 1;
   background: var(--grey-background);
   padding: var(--spacing-xl) var(--spacing-lg);
-  overflow: hidden;
 
   &-content {
     display: flex;
