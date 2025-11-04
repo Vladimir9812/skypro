@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, type JSX, useState } from 'react';
+import { type ChangeEvent, type FormEvent, type JSX, useEffect, useState } from 'react';
 import { WidgetLayout } from '~/widgets/layout/widgetLayout.tsx';
 import {
   Box,
@@ -13,21 +13,39 @@ import {
   Typography,
 } from '@mui/material';
 import { text } from '~/text.ts';
-import { maskDateInput } from '~/widgets/form/utils.ts';
+import { getDateByString, maskDateInput } from '~/widgets/form/utils.ts';
 import { categoryChips } from '~/data.ts';
 import classes from './formWidget.module.css';
-import type { ConsumptionForm } from '~/types.ts';
+import type { Consumption, ConsumptionForm } from '~/types.ts';
+import { v4 as uuidv4 } from 'uuid';
 
-const FormWidget = (): JSX.Element => {
-  const [data, setData] = useState<ConsumptionForm>({
-    description: '',
-    category: null,
-    date: null,
-    sum: null,
-  });
+type Props = {
+  editedItem: Consumption | null;
+  onEdit: (item: Consumption) => void;
+  onCreate: (item: Consumption) => void;
+};
+
+const initialForm: ConsumptionForm = {
+  description: '',
+  category: null,
+  date: '',
+  sum: '',
+};
+
+const FormWidget = ({ editedItem, onEdit, onCreate }: Props): JSX.Element => {
+  const [formData, setFormData] = useState<ConsumptionForm>(initialForm);
+
+  useEffect(() => {
+    if (editedItem)
+      setFormData({
+        ...editedItem,
+        sum: editedItem.sum.toString(),
+        date: editedItem.date.format('DD.MM.YYYY'),
+      });
+  }, [editedItem]);
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setData((data) => ({
+    setFormData((data) => ({
       ...data,
       [target.name]: target.value,
     }));
@@ -35,12 +53,30 @@ const FormWidget = (): JSX.Element => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
+
+    const item: Consumption = {
+      id: formData.id ?? uuidv4(),
+      category: formData.category!,
+      description: formData.description,
+      sum: Number(formData.sum),
+      date: getDateByString(formData.date),
+    };
+
+    if (editedItem) {
+      onEdit(item);
+    } else {
+      onCreate(item);
+    }
+
+    setFormData(initialForm);
   };
 
   return (
     <WidgetLayout>
       <Box component='form' className={classes['form-widget']} onSubmit={handleSubmit}>
-        <Typography variant='h2'>{text.widget.form.title}</Typography>
+        <Typography variant='h2'>
+          {editedItem ? text.widget.form.edit : text.widget.form.title}
+        </Typography>
 
         <FormControl onChange={handleChange}>
           <FormLabel htmlFor='description' className={classes.label}>
@@ -51,7 +87,7 @@ const FormWidget = (): JSX.Element => {
             id='description'
             name='description'
             size='small'
-            value={data.description}
+            value={formData.description}
             placeholder={text.widget.form.placeholder.description}
           />
         </FormControl>
@@ -69,7 +105,9 @@ const FormWidget = (): JSX.Element => {
                 label={
                   <Chip
                     icon={cat.icon && <cat.icon />}
-                    className={data.category === cat.value ? classes['radio-selected'] : undefined}
+                    className={
+                      formData.category === cat.value ? classes['radio-selected'] : undefined
+                    }
                     label={cat.label}
                     clickable
                   />
@@ -88,6 +126,7 @@ const FormWidget = (): JSX.Element => {
             id='date'
             name='date'
             size='small'
+            value={formData.date}
             placeholder={text.widget.form.placeholder.date}
             onInput={maskDateInput}
           />
@@ -103,12 +142,13 @@ const FormWidget = (): JSX.Element => {
             name='sum'
             size='small'
             type='number'
+            value={formData.sum}
             placeholder={text.widget.form.placeholder.sum}
           />
         </FormControl>
 
         <Button type='submit' className={classes.submit}>
-          {text.widget.form.submit}
+          {editedItem ? text.widget.form.edit : text.widget.form.submit}
         </Button>
       </Box>
     </WidgetLayout>

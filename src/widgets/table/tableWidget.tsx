@@ -16,32 +16,29 @@ import {
   Typography,
 } from '@mui/material';
 import { text } from '~/text.ts';
-import {
-  categoryMapping,
-  categoryOptions,
-  Category,
-  consumptions,
-  Sort,
-  sortOptions,
-} from '~/data.ts';
+import { categoryMapping, categoryOptions, Category, Sort, sortOptions } from '~/data.ts';
 import Edit from '~/assets/edit.svg?react';
 import Delete from '~/assets/bag.svg?react';
 import type { Consumption } from '~/types.ts';
 import classes from './tableWidget.module.css';
 
-const TableWidget = (): JSX.Element => {
-  const [data, setData] = useState<Consumption[]>(consumptions);
+type Props = {
+  data: Consumption[];
+  onEdit: (item: Consumption) => void;
+  onDelete: (item: Consumption) => void;
+};
+
+const TableWidget = ({ data, onEdit, onDelete }: Props): JSX.Element => {
+  const [rows, setRows] = useState<Consumption[]>(data);
 
   const [dateSort, setDateSort] = useState<Sort | ''>('');
   const [categoryId, setCategoryId] = useState<Category | ''>('');
-  const [deletedIds, setDeletedIds] = useState<string[]>([]);
 
   useEffect(() => {
     const isAsc = dateSort === Sort.asc;
 
-    setData(
-      consumptions
-        .filter((it) => !deletedIds.includes(it.id))
+    setRows(
+      data
         .filter((it) => (categoryId ? it.category === categoryId : true))
         .toSorted((a, b) => {
           if (a.date.isBefore(b.date)) return dateSort ? (isAsc ? 1 : -1) : 0;
@@ -49,7 +46,7 @@ const TableWidget = (): JSX.Element => {
           return 0;
         }),
     );
-  }, [categoryId, dateSort, deletedIds]);
+  }, [data, categoryId, dateSort]);
 
   // функция фильтрации по категории
   const handleFilter = ({ target }: SelectChangeEvent): void => {
@@ -61,9 +58,14 @@ const TableWidget = (): JSX.Element => {
     setDateSort(target.value as Sort);
   };
 
+  // функция редактирования
+  const handleEdit = (item: Consumption): void => {
+    onEdit(item);
+  };
+
   // функция удаления
   const handleDelete = (item: Consumption): void => {
-    setDeletedIds((ids) => [...ids, item.id]);
+    onDelete(item);
   };
 
   return (
@@ -126,14 +128,18 @@ const TableWidget = (): JSX.Element => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row) => (
+              {rows.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell sx={{ minWidth: 150 }}>{row.description}</TableCell>
                   <TableCell sx={{ minWidth: 120 }}>{categoryMapping[row.category]}</TableCell>
                   <TableCell sx={{ minWidth: 120 }}>{row.date.format('DD.MM.YYYY')}</TableCell>
                   <TableCell sx={{ minWidth: 100 }}>{row.sum + ' ₽'}</TableCell>
                   <TableCell align='right'>
-                    <Button className={classes['action-btn']} endIcon={<Edit />} />
+                    <Button
+                      className={classes['action-btn']}
+                      endIcon={<Edit />}
+                      onClick={() => handleEdit(row)}
+                    />
                     <Button
                       className={classes['action-btn']}
                       startIcon={<Delete />}

@@ -22,10 +22,11 @@ type Consumption = {
 };
 
 type ConsumptionForm = {
+  id?: string;
   description: string;
   category: Category | null;
-  date: Dayjs | null;
-  sum: number | null;
+  date: string;
+  sum: string;
 };
 
 export type { Consumption, ConsumptionForm, Option, Chip };

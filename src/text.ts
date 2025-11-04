@@ -22,6 +22,7 @@ const text = {
       },
     },
     form: {
+      edit: 'Редактировать расход',
       title: 'Новый расход',
       label: {
         description: 'Описание',

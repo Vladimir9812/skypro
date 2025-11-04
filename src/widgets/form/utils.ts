@@ -1,4 +1,5 @@
 import type { SyntheticEvent } from 'react';
+import dayjs, { type Dayjs } from 'dayjs';
 
 const maskDateInput = (e: SyntheticEvent) => {
   let value = (e.target as HTMLInputElement).value.replace(/\D/g, '').slice(0, 8);
@@ -7,4 +8,9 @@ const maskDateInput = (e: SyntheticEvent) => {
   (e.target as HTMLInputElement).value = value;
 };
 
-export { maskDateInput };
+const getDateByString = (str: string): Dayjs => {
+  const [day, month, year] = str.split('.');
+  return dayjs(`${month}.${day}.${year}`);
+};
+
+export { maskDateInput, getDateByString };

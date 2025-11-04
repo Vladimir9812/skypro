@@ -77,7 +77,7 @@ const consumptions: Consumption[] = [
     description: 'Аптека Вита',
     category: Category.other,
     date: dayjs('2024-07-03'),
-    sum: 60,
+    sum: 160,
   },
   {
     id: uuidv4(),
